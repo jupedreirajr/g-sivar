@@ -442,7 +442,10 @@ tv_ort_dir &lt;- fit.variogram(ev_ort_dir, vgm(c(&quot;Exp&quot;, &quot;Sph&quot
 </ul>
 <pre class="r"><code>moran &lt;- moransI.v(gd@coords, ev$dist[ev$dir.hor==max_dir],
                    unlist(gd@data), family=&#39;fixed&#39;)</code></pre>
-<p><img src="Figs/unnamed-chunk-19-1.png" /><!-- --></p>
+<div class="figure">
+<img src="Figs/unnamed-chunk-19-1.png" alt="Fig. 1 - Moran’s I for each distance measure" />
+<p class="caption">Fig. 1 - Moran’s I for each distance measure</p>
+</div>
 <pre class="r"><code>moran &lt;- as.data.frame(moran)
 names(moran)[3] &lt;- &quot;Morans_I&quot;</code></pre>
 </div>
@@ -455,9 +458,9 @@ names(moran)[3] &lt;- &quot;Morans_I&quot;</code></pre>
                 pv_G_SIVAR = pnorm(var_func$gamma, m@coef[1], m@coef[2]), 
                 alpha_0.05 = rep(qnorm(0.05, m@coef[1], m@coef[2]),nrow(moran)))
 
-kable(df, caption = &quot;Moran&#39;s I x G-SIVAR&quot;)</code></pre>
+kable(df, caption = &quot;Tab. 1 - Moran&#39;s I x G-SIVAR&quot;)</code></pre>
 <table>
-<caption>Moran’s I x G-SIVAR</caption>
+<caption>Tab. 1 - Moran’s I x G-SIVAR</caption>
 <thead>
 <tr class="header">
 <th align="right">dist</th>
@@ -475,7 +478,7 @@ kable(df, caption = &quot;Moran&#39;s I x G-SIVAR&quot;)</code></pre>
 <td align="right">0</td>
 <td align="right">0.6631591</td>
 <td align="right">0.0000000</td>
-<td align="right">0.9349556</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="even">
 <td align="right">0.0598250</td>
@@ -483,111 +486,111 @@ kable(df, caption = &quot;Moran&#39;s I x G-SIVAR&quot;)</code></pre>
 <td align="right">0</td>
 <td align="right">0.7408862</td>
 <td align="right">0.0000000</td>
-<td align="right">0.9349556</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="odd">
 <td align="right">0.0886175</td>
 <td align="right">0.2336791</td>
 <td align="right">0</td>
 <td align="right">0.7988081</td>
-<td align="right">0.0000002</td>
-<td align="right">0.9349556</td>
+<td align="right">0.0000000</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="even">
 <td align="right">0.1074084</td>
 <td align="right">0.1957342</td>
 <td align="right">0</td>
 <td align="right">0.8294313</td>
-<td align="right">0.0000080</td>
-<td align="right">0.9349556</td>
+<td align="right">0.0000003</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="odd">
 <td align="right">0.1442869</td>
 <td align="right">0.1555987</td>
 <td align="right">0</td>
 <td align="right">0.8766439</td>
-<td align="right">0.0009058</td>
-<td align="right">0.9349556</td>
+<td align="right">0.0001527</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="even">
 <td align="right">0.1769859</td>
 <td align="right">0.1231298</td>
 <td align="right">0</td>
 <td align="right">0.9074510</td>
-<td align="right">0.0096310</td>
-<td align="right">0.9349556</td>
+<td align="right">0.0033748</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="odd">
 <td align="right">0.2075116</td>
 <td align="right">0.0967634</td>
 <td align="right">0</td>
 <td align="right">0.9292254</td>
-<td align="right">0.0367458</td>
-<td align="right">0.9349556</td>
+<td align="right">0.0191512</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="even">
 <td align="right">0.2363631</td>
 <td align="right">0.0788725</td>
 <td align="right">0</td>
 <td align="right">0.9450748</td>
-<td align="right">0.0824241</td>
-<td align="right">0.9349556</td>
+<td align="right">0.0539519</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="odd">
 <td align="right">0.2670135</td>
 <td align="right">0.0628922</td>
 <td align="right">0</td>
 <td align="right">0.9580433</td>
-<td align="right">0.1443480</td>
-<td align="right">0.9349556</td>
+<td align="right">0.1097060</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="even">
 <td align="right">0.2998950</td>
 <td align="right">0.0483075</td>
 <td align="right">0</td>
 <td align="right">0.9685720</td>
-<td align="right">0.2133871</td>
-<td align="right">0.9349556</td>
+<td align="right">0.1788091</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="odd">
 <td align="right">0.3330529</td>
 <td align="right">0.0384230</td>
 <td align="right">0</td>
 <td align="right">0.9765158</td>
-<td align="right">0.2763118</td>
-<td align="right">0.9349556</td>
+<td align="right">0.2459164</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="even">
 <td align="right">0.3636959</td>
 <td align="right">0.0327746</td>
 <td align="right">0</td>
 <td align="right">0.9820595</td>
-<td align="right">0.3250452</td>
-<td align="right">0.9349556</td>
+<td align="right">0.2997467</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="odd">
 <td align="right">0.3942781</td>
 <td align="right">0.0281629</td>
 <td align="right">0</td>
 <td align="right">0.9862873</td>
-<td align="right">0.3644007</td>
-<td align="right">0.9349556</td>
+<td align="right">0.3440697</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="even">
 <td align="right">0.4256325</td>
 <td align="right">0.0237423</td>
 <td align="right">0</td>
 <td align="right">0.9895896</td>
-<td align="right">0.3961956</td>
-<td align="right">0.9349556</td>
+<td align="right">0.3802896</td>
+<td align="right">0.943805</td>
 </tr>
 <tr class="odd">
 <td align="right">0.4575554</td>
 <td align="right">0.0180395</td>
 <td align="right">0</td>
 <td align="right">0.9921361</td>
-<td align="right">0.4212060</td>
-<td align="right">0.9349556</td>
+<td align="right">0.4089741</td>
+<td align="right">0.943805</td>
 </tr>
 </tbody>
 </table>
@@ -602,8 +605,8 @@ ggplot(data = df_melt, aes(x = dist, y = value, colour = variable, linetype = va
   scale_color_manual(values=c(&#39;black&#39;,&#39;blue&#39;,&#39;red&#39;)) +
   theme(legend.title = element_blank())</code></pre>
 <div class="figure">
-<img src="Figs/unnamed-chunk-21-1.png" alt="Plot of Moran’s I, G-SIVAR &amp; sig. level for the G-SIVAR" />
-<p class="caption">Plot of Moran’s I, G-SIVAR &amp; sig. level for the G-SIVAR</p>
+<img src="Figs/unnamed-chunk-21-1.png" alt="Fig 2 - Plot of Moran’s I, G-SIVAR &amp; sig. level for the G-SIVAR" />
+<p class="caption">Fig 2 - Plot of Moran’s I, G-SIVAR &amp; sig. level for the G-SIVAR</p>
 </div>
 </div>
 </div>
