@@ -14,7 +14,7 @@ Among the exploratory spatial data analysis tools, there are indicators of spati
 #### (0a) Loading packages:
 ```{r, message = FALSE, warning = FALSE}
 library(lctools); library(scales); library(sp); library(gstat); library(reshape2);
-library(dplyr); library(bbmle); library(ggplot2); library(tinytex)
+library(dplyr); library(bbmle); library(ggplot2); library(tinytex); library(knitr)
 ```
 
 #### (0b) Reading data:
@@ -174,11 +174,11 @@ df = data.frame(dist = ev$dist[ev$dir.hor==max_dir], Morans_I = moran$Morans_I,
                 pv_G_SIVAR = pnorm(var_func$gamma, m@coef[1], m@coef[2]), 
                 alpha_0.05 = rep(qnorm(0.05, m@coef[1], m@coef[2]),nrow(moran)))
 
-df
+kable(df, caption = "Moran's I x G-SIVAR")
 ```
 
 #### (6b) Plotting results:
-```{r}
+```{r, fig.cap = "Plot of Moran's I, G-SIVAR & sig. level for the G-SIVAR"}
 df_melt <- melt(df %>% select(dist,Morans_I,G_SIVAR,alpha_0.05), id = "dist")
 
 ggplot(data = df_melt, aes(x = dist, y = value, colour = variable, linetype = variable)) +

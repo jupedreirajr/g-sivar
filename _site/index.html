@@ -294,6 +294,7 @@ $(document).ready(function () {
 </div>
 
 
+<pre class="r"><code>knitr::opts_chunk$set(fig.path=&#39;Figs/&#39;)</code></pre>
 <div id="brief-description" class="section level3">
 <h3>Brief Description:</h3>
 <p>Among the exploratory spatial data analysis tools, there are indicators of spatial association, which measure the degree of spatial dependence of analysed data and can be applied to quantitative data. Another procedure available is geostatistics, which is based on the variogram, describing quantitatively and qualitatively the spatial structure of a variable. We present the implementation of the Global Spatial Indicator Based on Variogram – G-SIVAR in R software, which uses the concept of the variogram to develop a global indicator of spatial association. This method was proposed by <strong>Cláudia Cristina Baptista Ramos Naizer</strong> (ORCID: 0000-0001-8326-7082) and <strong>Cira Souza Pitombo</strong> (ORCID: 0000-0001-9864-3175). The code was developed by <strong>Jorge Ubirajara Pedreira Junior</strong> (ORCID: 0000-0002-8243-5395) and <strong>David Souza Rodrigues</strong> (ORCID: 0000-0002-8334-5260)</p>
@@ -303,7 +304,7 @@ $(document).ready(function () {
 <div id="a-loading-packages" class="section level4">
 <h4>(0a) Loading packages:</h4>
 <pre class="r"><code>library(lctools); library(scales); library(sp); library(gstat); library(reshape2);
-library(dplyr); library(bbmle); library(ggplot2); library(tinytex)</code></pre>
+library(dplyr); library(bbmle); library(ggplot2); library(tinytex); library(knitr)</code></pre>
 </div>
 <div id="b-reading-data" class="section level4">
 <h4>(0b) Reading data:</h4>
@@ -315,8 +316,8 @@ library(dplyr); library(bbmle); library(ggplot2); library(tinytex)</code></pre>
 <h4>(0b1) Centro SP data:</h4>
 <pre class="r"><code>dados &lt;- read.table(&quot;2.CentroSP.txt&quot;,h=T)</code></pre>
 </div>
-<div id="b2-cidade-fictcia-data" class="section level4">
-<h4>(0b2) Cidade Fict?cia data:</h4>
+<div id="b2-cidade-ficticia-data" class="section level4">
+<h4>(0b2) Cidade Ficticia data:</h4>
 <pre class="r"><code>#dados &lt;- read.table(&quot;1.CidadeFicticiaBin.txt&quot;,h=T)
 #nomes &lt;- names(dados); nomes[2:3] &lt;- c(&#39;x&#39;,&#39;y&#39;); colnames(dados) &lt;- nomes</code></pre>
 </div>
@@ -455,23 +456,142 @@ names(moran)[3] &lt;- &quot;Morans_I&quot;</code></pre>
                 pv_G_SIVAR = pnorm(var_func$gamma, m@coef[1], m@coef[2]), 
                 alpha_0.05 = rep(qnorm(0.05, m@coef[1], m@coef[2]),nrow(moran)))
 
-df</code></pre>
-<pre><code>##          dist   Morans_I   pv_Morans_I   G_SIVAR   pv_G_SIVAR alpha_0.05
-## 1  0.02997025 0.40159142  3.774803e-37 0.6631591 7.547742e-30   0.950917
-## 2  0.05982504 0.29709011 1.020651e-116 0.7408862 1.926726e-18   0.950917
-## 3  0.08861750 0.23367910 4.382844e-150 0.7988081 7.807928e-12   0.950917
-## 4  0.10740838 0.19573417 6.097565e-168 0.8294313 5.457335e-09   0.950917
-## 5  0.14428686 0.15559866 1.002898e-176 0.8766439 1.784366e-05   0.950917
-## 6  0.17698592 0.12312978 1.208985e-161 0.9074510 9.630091e-04   0.950917
-## 7  0.20751158 0.09676341 2.054673e-144 0.9292254 8.852200e-03   0.950917
-## 8  0.23636311 0.07887251 1.540709e-125 0.9450748 3.283813e-02   0.950917
-## 9  0.26701349 0.06289219 1.095970e-105 0.9580433 7.985482e-02   0.950917
-## 10 0.29989497 0.04830749  1.496657e-82 0.9685720 1.461181e-01   0.950917
-## 11 0.33305294 0.03842298  2.152394e-67 0.9765158 2.156317e-01   0.950917
-## 12 0.36369590 0.03277455  2.746327e-62 0.9820595 2.738336e-01   0.950917
-## 13 0.39427808 0.02816293  1.144748e-57 0.9862873 3.229066e-01   0.950917
-## 14 0.42563245 0.02374234  5.061804e-52 0.9895896 3.635732e-01   0.950917
-## 15 0.45755535 0.01803952  1.290005e-38 0.9921361 3.960472e-01   0.950917</code></pre>
+kable(df, caption = &quot;Moran&#39;s I x G-SIVAR&quot;)</code></pre>
+<table>
+<caption>Moran’s I x G-SIVAR</caption>
+<thead>
+<tr class="header">
+<th align="right">dist</th>
+<th align="right">Morans_I</th>
+<th align="right">pv_Morans_I</th>
+<th align="right">G_SIVAR</th>
+<th align="right">pv_G_SIVAR</th>
+<th align="right">alpha_0.05</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.0299702</td>
+<td align="right">0.4015914</td>
+<td align="right">0</td>
+<td align="right">0.6631591</td>
+<td align="right">0.0000000</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="even">
+<td align="right">0.0598250</td>
+<td align="right">0.2970901</td>
+<td align="right">0</td>
+<td align="right">0.7408862</td>
+<td align="right">0.0000000</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0886175</td>
+<td align="right">0.2336791</td>
+<td align="right">0</td>
+<td align="right">0.7988081</td>
+<td align="right">0.0000009</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="even">
+<td align="right">0.1074084</td>
+<td align="right">0.1957342</td>
+<td align="right">0</td>
+<td align="right">0.8294313</td>
+<td align="right">0.0000253</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="odd">
+<td align="right">0.1442869</td>
+<td align="right">0.1555987</td>
+<td align="right">0</td>
+<td align="right">0.8766439</td>
+<td align="right">0.0016902</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="even">
+<td align="right">0.1769859</td>
+<td align="right">0.1231298</td>
+<td align="right">0</td>
+<td align="right">0.9074510</td>
+<td align="right">0.0139411</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="odd">
+<td align="right">0.2075116</td>
+<td align="right">0.0967634</td>
+<td align="right">0</td>
+<td align="right">0.9292254</td>
+<td align="right">0.0463211</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="even">
+<td align="right">0.2363631</td>
+<td align="right">0.0788725</td>
+<td align="right">0</td>
+<td align="right">0.9450748</td>
+<td align="right">0.0959342</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="odd">
+<td align="right">0.2670135</td>
+<td align="right">0.0628922</td>
+<td align="right">0</td>
+<td align="right">0.9580433</td>
+<td align="right">0.1593906</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="even">
+<td align="right">0.2998950</td>
+<td align="right">0.0483075</td>
+<td align="right">0</td>
+<td align="right">0.9685720</td>
+<td align="right">0.2275850</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="odd">
+<td align="right">0.3330529</td>
+<td align="right">0.0384230</td>
+<td align="right">0</td>
+<td align="right">0.9765158</td>
+<td align="right">0.2883894</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="even">
+<td align="right">0.3636959</td>
+<td align="right">0.0327746</td>
+<td align="right">0</td>
+<td align="right">0.9820595</td>
+<td align="right">0.3349127</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="odd">
+<td align="right">0.3942781</td>
+<td align="right">0.0281629</td>
+<td align="right">0</td>
+<td align="right">0.9862873</td>
+<td align="right">0.3722331</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="even">
+<td align="right">0.4256325</td>
+<td align="right">0.0237423</td>
+<td align="right">0</td>
+<td align="right">0.9895896</td>
+<td align="right">0.4022655</td>
+<td align="right">0.930773</td>
+</tr>
+<tr class="odd">
+<td align="right">0.4575554</td>
+<td align="right">0.0180395</td>
+<td align="right">0</td>
+<td align="right">0.9921361</td>
+<td align="right">0.4258347</td>
+<td align="right">0.930773</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="b-plotting-results" class="section level4">
 <h4>(6b) Plotting results:</h4>
