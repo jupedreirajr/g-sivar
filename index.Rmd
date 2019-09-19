@@ -2,7 +2,7 @@
 title: "Implementation of the Global Spatial Indicator Based on Variogram (G-SIVAR) in R"
 output: html_document
 ---
-```{r global_options, include = FALSE}
+```{r global_options}
 knitr::opts_chunk$set(fig.path='Figs/')
 ```
 
