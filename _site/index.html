@@ -294,7 +294,6 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>knitr::opts_chunk$set(fig.path=&#39;Figs/&#39;)</code></pre>
 <div id="brief-description" class="section level3">
 <h3>Brief Description:</h3>
 <p>Among the exploratory spatial data analysis tools, there are indicators of spatial association, which measure the degree of spatial dependence of analysed data and can be applied to quantitative data. Another procedure available is geostatistics, which is based on the variogram, describing quantitatively and qualitatively the spatial structure of a variable. We present the implementation of the Global Spatial Indicator Based on Variogram – G-SIVAR in R software, which uses the concept of the variogram to develop a global indicator of spatial association. This method was proposed by <strong>Cláudia Cristina Baptista Ramos Naizer</strong> (ORCID: 0000-0001-8326-7082) and <strong>Cira Souza Pitombo</strong> (ORCID: 0000-0001-9864-3175). The code was developed by <strong>Jorge Ubirajara Pedreira Junior</strong> (ORCID: 0000-0002-8243-5395) and <strong>David Souza Rodrigues</strong> (ORCID: 0000-0002-8334-5260)</p>
@@ -304,7 +303,7 @@ $(document).ready(function () {
 <div id="a-loading-packages" class="section level4">
 <h4>(0a) Loading packages:</h4>
 <pre class="r"><code>library(lctools); library(scales); library(sp); library(gstat); library(reshape2);
-library(dplyr); library(bbmle); library(ggplot2); library(tinytex); library(knitr)</code></pre>
+library(dplyr); library(bbmle); library(ggplot2); library(tinytex); library(knitr); library(tibble)</code></pre>
 </div>
 <div id="b-reading-data" class="section level4">
 <h4>(0b) Reading data:</h4>
@@ -459,142 +458,25 @@ names(moran)[3] &lt;- &quot;Morans_I&quot;</code></pre>
                 pv_G_SIVAR = pnorm(var_func$gamma, m@coef[1], m@coef[2]), 
                 alpha_0.05 = rep(qnorm(0.05, m@coef[1], m@coef[2]),nrow(moran)))
 
-kable(df, caption = &quot;Tab. 1 - Moran&#39;s I x G-SIVAR&quot;)</code></pre>
-<table>
-<caption>Tab. 1 - Moran’s I x G-SIVAR</caption>
-<thead>
-<tr class="header">
-<th align="right">dist</th>
-<th align="right">Morans_I</th>
-<th align="right">pv_Morans_I</th>
-<th align="right">G_SIVAR</th>
-<th align="right">pv_G_SIVAR</th>
-<th align="right">alpha_0.05</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">0.0299702</td>
-<td align="right">0.4015914</td>
-<td align="right">0</td>
-<td align="right">0.6631591</td>
-<td align="right">0.0000000</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="even">
-<td align="right">0.0598250</td>
-<td align="right">0.2970901</td>
-<td align="right">0</td>
-<td align="right">0.7408862</td>
-<td align="right">0.0000000</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="odd">
-<td align="right">0.0886175</td>
-<td align="right">0.2336791</td>
-<td align="right">0</td>
-<td align="right">0.7988081</td>
-<td align="right">0.0000000</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="even">
-<td align="right">0.1074084</td>
-<td align="right">0.1957342</td>
-<td align="right">0</td>
-<td align="right">0.8294313</td>
-<td align="right">0.0000009</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="odd">
-<td align="right">0.1442869</td>
-<td align="right">0.1555987</td>
-<td align="right">0</td>
-<td align="right">0.8766439</td>
-<td align="right">0.0002693</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="even">
-<td align="right">0.1769859</td>
-<td align="right">0.1231298</td>
-<td align="right">0</td>
-<td align="right">0.9074510</td>
-<td align="right">0.0047096</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="odd">
-<td align="right">0.2075116</td>
-<td align="right">0.0967634</td>
-<td align="right">0</td>
-<td align="right">0.9292254</td>
-<td align="right">0.0235404</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="even">
-<td align="right">0.2363631</td>
-<td align="right">0.0788725</td>
-<td align="right">0</td>
-<td align="right">0.9450748</td>
-<td align="right">0.0616683</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="odd">
-<td align="right">0.2670135</td>
-<td align="right">0.0628922</td>
-<td align="right">0</td>
-<td align="right">0.9580433</td>
-<td align="right">0.1195804</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="even">
-<td align="right">0.2998950</td>
-<td align="right">0.0483075</td>
-<td align="right">0</td>
-<td align="right">0.9685720</td>
-<td align="right">0.1889685</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="odd">
-<td align="right">0.3330529</td>
-<td align="right">0.0384230</td>
-<td align="right">0</td>
-<td align="right">0.9765158</td>
-<td align="right">0.2549987</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="even">
-<td align="right">0.3636959</td>
-<td align="right">0.0327746</td>
-<td align="right">0</td>
-<td align="right">0.9820595</td>
-<td align="right">0.3073724</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="odd">
-<td align="right">0.3942781</td>
-<td align="right">0.0281629</td>
-<td align="right">0</td>
-<td align="right">0.9862873</td>
-<td align="right">0.3502289</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="even">
-<td align="right">0.4256325</td>
-<td align="right">0.0237423</td>
-<td align="right">0</td>
-<td align="right">0.9895896</td>
-<td align="right">0.3851222</td>
-<td align="right">0.9413701</td>
-</tr>
-<tr class="odd">
-<td align="right">0.4575554</td>
-<td align="right">0.0180395</td>
-<td align="right">0</td>
-<td align="right">0.9921361</td>
-<td align="right">0.4126963</td>
-<td align="right">0.9413701</td>
-</tr>
-</tbody>
-</table>
+as_tibble(df)</code></pre>
+<pre><code>## # A tibble: 15 x 6
+##      dist Morans_I pv_Morans_I G_SIVAR pv_G_SIVAR alpha_0.05
+##     &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+##  1 0.0300   0.402    3.77e- 37   0.663   2.05e-16      0.932
+##  2 0.0598   0.297    1.02e-116   0.741   1.95e-10      0.932
+##  3 0.0886   0.234    4.38e-150   0.799   5.90e- 7      0.932
+##  4 0.107    0.196    6.10e-168   0.829   1.90e- 5      0.932
+##  5 0.144    0.156    1.00e-176   0.877   1.45e- 3      0.932
+##  6 0.177    0.123    1.21e-161   0.907   1.27e- 2      0.932
+##  7 0.208    0.0968   2.05e-144   0.929   4.37e- 2      0.932
+##  8 0.236    0.0789   1.54e-125   0.945   9.24e- 2      0.932
+##  9 0.267    0.0629   1.10e-105   0.958   1.56e- 1      0.932
+## 10 0.300    0.0483   1.50e- 82   0.969   2.24e- 1      0.932
+## 11 0.333    0.0384   2.15e- 67   0.977   2.86e- 1      0.932
+## 12 0.364    0.0328   2.75e- 62   0.982   3.33e- 1      0.932
+## 13 0.394    0.0282   1.14e- 57   0.986   3.71e- 1      0.932
+## 14 0.426    0.0237   5.06e- 52   0.990   4.01e- 1      0.932
+## 15 0.458    0.0180   1.29e- 38   0.992   4.25e- 1      0.932</code></pre>
 </div>
 <div id="b-plotting-results" class="section level4">
 <h4>(6b) Plotting results:</h4>

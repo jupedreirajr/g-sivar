@@ -3,9 +3,6 @@ title: "Implementation of the Global Spatial Indicator Based on Variogram (G-SIV
 output: html_document
 ---
 
-```r
-knitr::opts_chunk$set(fig.path='Figs/')
-```
 
 ### Brief Description:
 
@@ -16,7 +13,7 @@ Among the exploratory spatial data analysis tools, there are indicators of spati
 
 ```r
 library(lctools); library(scales); library(sp); library(gstat); library(reshape2);
-library(dplyr); library(bbmle); library(ggplot2); library(tinytex); library(knitr)
+library(dplyr); library(bbmle); library(ggplot2); library(tinytex); library(knitr); library(tibble)
 ```
 
 #### (0b) Reading data:
@@ -200,30 +197,29 @@ df = data.frame(dist = ev$dist[ev$dir.hor==max_dir], Morans_I = moran$Morans_I,
                 pv_G_SIVAR = pnorm(var_func$gamma, m@coef[1], m@coef[2]), 
                 alpha_0.05 = rep(qnorm(0.05, m@coef[1], m@coef[2]),nrow(moran)))
 
-kable(df, caption = "Tab. 1 - Moran's I x G-SIVAR")
+as_tibble(df)
 ```
 
-
-
-Table: Tab. 1 - Moran's I x G-SIVAR
-
-      dist    Morans_I   pv_Morans_I     G_SIVAR   pv_G_SIVAR   alpha_0.05
-----------  ----------  ------------  ----------  -----------  -----------
- 0.0299702   0.4015914             0   0.6631591    0.0000000    0.9413701
- 0.0598250   0.2970901             0   0.7408862    0.0000000    0.9413701
- 0.0886175   0.2336791             0   0.7988081    0.0000000    0.9413701
- 0.1074084   0.1957342             0   0.8294313    0.0000009    0.9413701
- 0.1442869   0.1555987             0   0.8766439    0.0002693    0.9413701
- 0.1769859   0.1231298             0   0.9074510    0.0047096    0.9413701
- 0.2075116   0.0967634             0   0.9292254    0.0235404    0.9413701
- 0.2363631   0.0788725             0   0.9450748    0.0616683    0.9413701
- 0.2670135   0.0628922             0   0.9580433    0.1195804    0.9413701
- 0.2998950   0.0483075             0   0.9685720    0.1889685    0.9413701
- 0.3330529   0.0384230             0   0.9765158    0.2549987    0.9413701
- 0.3636959   0.0327746             0   0.9820595    0.3073724    0.9413701
- 0.3942781   0.0281629             0   0.9862873    0.3502289    0.9413701
- 0.4256325   0.0237423             0   0.9895896    0.3851222    0.9413701
- 0.4575554   0.0180395             0   0.9921361    0.4126963    0.9413701
+```
+## # A tibble: 15 x 6
+##      dist Morans_I pv_Morans_I G_SIVAR pv_G_SIVAR alpha_0.05
+##     <dbl>    <dbl>       <dbl>   <dbl>      <dbl>      <dbl>
+##  1 0.0300   0.402    3.77e- 37   0.663   2.05e-16      0.932
+##  2 0.0598   0.297    1.02e-116   0.741   1.95e-10      0.932
+##  3 0.0886   0.234    4.38e-150   0.799   5.90e- 7      0.932
+##  4 0.107    0.196    6.10e-168   0.829   1.90e- 5      0.932
+##  5 0.144    0.156    1.00e-176   0.877   1.45e- 3      0.932
+##  6 0.177    0.123    1.21e-161   0.907   1.27e- 2      0.932
+##  7 0.208    0.0968   2.05e-144   0.929   4.37e- 2      0.932
+##  8 0.236    0.0789   1.54e-125   0.945   9.24e- 2      0.932
+##  9 0.267    0.0629   1.10e-105   0.958   1.56e- 1      0.932
+## 10 0.300    0.0483   1.50e- 82   0.969   2.24e- 1      0.932
+## 11 0.333    0.0384   2.15e- 67   0.977   2.86e- 1      0.932
+## 12 0.364    0.0328   2.75e- 62   0.982   3.33e- 1      0.932
+## 13 0.394    0.0282   1.14e- 57   0.986   3.71e- 1      0.932
+## 14 0.426    0.0237   5.06e- 52   0.990   4.01e- 1      0.932
+## 15 0.458    0.0180   1.29e- 38   0.992   4.25e- 1      0.932
+```
 
 #### (6b) Plotting results:
 

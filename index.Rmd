@@ -2,7 +2,7 @@
 title: "Implementation of the Global Spatial Indicator Based on Variogram (G-SIVAR) in R"
 output: html_document
 ---
-```{r global_options}
+```{r global_options, include = FALSE}
 knitr::opts_chunk$set(fig.path='Figs/')
 ```
 
@@ -14,7 +14,7 @@ Among the exploratory spatial data analysis tools, there are indicators of spati
 #### (0a) Loading packages:
 ```{r, message = FALSE, warning = FALSE}
 library(lctools); library(scales); library(sp); library(gstat); library(reshape2);
-library(dplyr); library(bbmle); library(ggplot2); library(tinytex); library(knitr)
+library(dplyr); library(bbmle); library(ggplot2); library(tinytex); library(knitr); library(tibble)
 ```
 
 #### (0b) Reading data:
@@ -174,7 +174,7 @@ df = data.frame(dist = ev$dist[ev$dir.hor==max_dir], Morans_I = moran$Morans_I,
                 pv_G_SIVAR = pnorm(var_func$gamma, m@coef[1], m@coef[2]), 
                 alpha_0.05 = rep(qnorm(0.05, m@coef[1], m@coef[2]),nrow(moran)))
 
-kable(df, caption = "Tab. 1 - Moran's I x G-SIVAR")
+as_tibble(df)
 ```
 
 #### (6b) Plotting results:
