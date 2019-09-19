@@ -2,6 +2,8 @@
 title: "Implementation of the Global Spatial Indicator Based on Variogram (G-SIVAR) in R"
 output: html_document
 ---
+
+
 ### Brief Description:
 
 Among the exploratory spatial data analysis tools, there are indicators of spatial association, which measure the degree of spatial dependence of analysed data and can be applied to quantitative data. Another procedure available is geostatistics, which is based on the variogram, describing quantitatively and qualitatively the spatial structure of a variable. We present the implementation of the Global Spatial Indicator Based on Variogram – G-SIVAR in R software, which uses the concept of the variogram to develop a global indicator of spatial association. This method was proposed by **Cláudia Cristina Baptista Ramos Naizer** (ORCID: 0000-0001-8326-7082) and **Cira Souza Pitombo** (ORCID: 0000-0001-9864-3175). The code was developed by **Jorge Ubirajara Pedreira Junior** (ORCID: 0000-0002-8243-5395) and **David Souza Rodrigues** (ORCID: 0000-0002-8334-5260)
@@ -179,7 +181,7 @@ moran <- moransI.v(gd@coords, ev$dist[ev$dir.hor==max_dir],
                    unlist(gd@data), family='fixed')
 ```
 
-![](index_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
+![](Figs/unnamed-chunk-19-1.png)<!-- -->
 
 ```r
 moran <- as.data.frame(moran)
@@ -200,21 +202,21 @@ df
 
 ```
 ##          dist   Morans_I   pv_Morans_I   G_SIVAR   pv_G_SIVAR alpha_0.05
-## 1  0.02997025 0.40159142  3.774803e-37 0.6631591 1.782766e-17  0.9342475
-## 2  0.05982504 0.29709011 1.020651e-116 0.7408862 4.526974e-11  0.9342475
-## 3  0.08861750 0.23367910 4.382844e-150 0.7988081 2.414430e-07  0.9342475
-## 4  0.10740838 0.19573417 6.097565e-168 0.8294313 9.909351e-06  0.9342475
-## 5  0.14428686 0.15559866 1.002898e-176 0.8766439 1.014823e-03  0.9342475
-## 6  0.17698592 0.12312978 1.208985e-161 0.9074510 1.030117e-02  0.9342475
-## 7  0.20751158 0.09676341 2.054673e-144 0.9292254 3.832303e-02  0.9342475
-## 8  0.23636311 0.07887251 1.540709e-125 0.9450748 8.472069e-02  0.9342475
-## 9  0.26701349 0.06289219 1.095970e-105 0.9580433 1.469551e-01  0.9342475
-## 10 0.29989497 0.04830749  1.496657e-82 0.9685720 2.158761e-01  0.9342475
-## 11 0.33305294 0.03842298  2.152394e-67 0.9765158 2.784418e-01  0.9342475
-## 12 0.36369590 0.03277455  2.746327e-62 0.9820595 3.267897e-01  0.9342475
-## 13 0.39427808 0.02816293  1.144748e-57 0.9862873 3.657864e-01  0.9342475
-## 14 0.42563245 0.02374234  5.061804e-52 0.9895896 3.972687e-01  0.9342475
-## 15 0.45755535 0.01803952  1.290005e-38 0.9921361 4.220228e-01  0.9342475
+## 1  0.02997025 0.40159142  3.774803e-37 0.6631591 7.547742e-30   0.950917
+## 2  0.05982504 0.29709011 1.020651e-116 0.7408862 1.926726e-18   0.950917
+## 3  0.08861750 0.23367910 4.382844e-150 0.7988081 7.807928e-12   0.950917
+## 4  0.10740838 0.19573417 6.097565e-168 0.8294313 5.457335e-09   0.950917
+## 5  0.14428686 0.15559866 1.002898e-176 0.8766439 1.784366e-05   0.950917
+## 6  0.17698592 0.12312978 1.208985e-161 0.9074510 9.630091e-04   0.950917
+## 7  0.20751158 0.09676341 2.054673e-144 0.9292254 8.852200e-03   0.950917
+## 8  0.23636311 0.07887251 1.540709e-125 0.9450748 3.283813e-02   0.950917
+## 9  0.26701349 0.06289219 1.095970e-105 0.9580433 7.985482e-02   0.950917
+## 10 0.29989497 0.04830749  1.496657e-82 0.9685720 1.461181e-01   0.950917
+## 11 0.33305294 0.03842298  2.152394e-67 0.9765158 2.156317e-01   0.950917
+## 12 0.36369590 0.03277455  2.746327e-62 0.9820595 2.738336e-01   0.950917
+## 13 0.39427808 0.02816293  1.144748e-57 0.9862873 3.229066e-01   0.950917
+## 14 0.42563245 0.02374234  5.061804e-52 0.9895896 3.635732e-01   0.950917
+## 15 0.45755535 0.01803952  1.290005e-38 0.9921361 3.960472e-01   0.950917
 ```
 
 #### (6b) Plotting results:
@@ -229,6 +231,6 @@ ggplot(data = df_melt, aes(x = dist, y = value, colour = variable, linetype = va
   theme(legend.title = element_blank())
 ```
 
-![](index_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
+![](Figs/unnamed-chunk-21-1.png)<!-- -->
 
 
