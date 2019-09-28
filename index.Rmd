@@ -52,7 +52,7 @@ gd <- SpatialPointsDataFrame(coords=cbind(x_nor,y_nor),
                              data = as.data.frame(dados$Avg_Tot_auto))
 ```
 
-#### (1b) Spatial points dataframe for Cidade Fict?cia (non-scaled and scaled versions):
+#### (1b) Spatial points dataframe for Cidade Ficticia (non-scaled and scaled versions):
 ```{r}
 #gd <- SpatialPointsDataFrame(coords=cbind(dados$x,dados$y),
                              #data = as.data.frame(dados$ESCOLHA))
